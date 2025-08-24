@@ -6,25 +6,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    /* ページ全体の高さを100%に */
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
     }
 
-    /* 地図を画面いっぱいに */
     #map {
       height: 80vh;  /* 画面高さの80% */
       width: 100%;
     }
 
-    /* スマホ向けポップアップ文字サイズ */
     @media (max-width: 768px) {
       #map {
-        height: 60vh; /* スマホでは少し低めに */
+        height: 60vh; /* スマホは少し低め */
       }
-
       .leaflet-popup-content {
         font-size: 14px;
         max-width: 200px;
@@ -40,11 +36,10 @@
   <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
 
   <script>
-    // 画面幅によって初期ズームを調整
+    // 初期ズームは画面幅で調整
     const zoomLevel = window.innerWidth < 768 ? 11 : 10;
     const map = L.map('map').setView([34.693763, 135.502191], zoomLevel);
 
-    // レイヤー設定
     const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
     const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 
@@ -58,7 +53,7 @@
     // アイコンサイズを画面幅で変える
     const iconSize = window.innerWidth < 768 ? [20, 20] : [25, 25];
     const customIcon = L.icon({
-      iconUrl: 'images/onigiri.png',
+      iconUrl: 'images/onigiri.png', // index.html から見た相対パス
       iconSize: iconSize,
       iconAnchor: [iconSize[0]-5, iconSize[1]-5],
       popupAnchor: [0, -iconSize[1]+5]

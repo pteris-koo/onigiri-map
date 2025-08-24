@@ -5,7 +5,17 @@
   <meta charset="utf-8" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-     #map { height: 500px; width: 100%; }
+    /* デフォルト：PC用 */
+    #map {
+      height: 500px;  /* 高さ500px */
+      width: 100%;    /* 幅は常に画面いっぱい */
+    }
+/* スマホ向け調整 */
+  @media (max-width: 768px) {   /* 画面幅が768px以下のとき */
+    #map {
+      height: 300px;  /* 高さを少し小さく */
+    }
+  }
   </style>
 </head>
 <body>

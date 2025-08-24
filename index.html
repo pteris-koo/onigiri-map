@@ -11,12 +11,13 @@
       width: 100%;    /* 幅は常に画面いっぱい */
     }
 /* スマホ向け調整 */
-  @media (max-width: 768px) {   /* 画面幅が768px以下のとき */
-    #map {
-      height: 300px;  /* 高さを少し小さく */
-    }
+  @media (max-width: 768px) {
+  .leaflet-popup-content {
+    font-size: 14px; /* デフォルトより少し大きめ */
+    max-width: 200px; /* スマホ画面に収まる幅 */
   }
-  </style>
+}
+     </style>
 </head>
 <body>
   <h2>大阪のおにぎり屋MAP</h2>

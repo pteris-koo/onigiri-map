@@ -3,33 +3,9 @@
 <head>
   <title>大阪のおにぎり屋MAP</title>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    /* ページ全体の高さを100%に */
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* 地図を画面いっぱいに */
-    #map {
-      height: 80vh;  /* 画面高さの80% */
-      width: 100%;
-    }
-
-    /* スマホ向けポップアップ文字サイズ */
-    @media (max-width: 768px) {
-      #map {
-        height: 60vh; /* スマホでは少し低めに */
-      }
-
-      .leaflet-popup-content {
-        font-size: 14px;
-        max-width: 200px;
-      }
-    }
+     #map { height: 80vh; width: 100%; }
   </style>
 </head>
 <body>
@@ -40,13 +16,10 @@
   <script src="https://unpkg.com/papaparse@5.3.2/papaparse.min.js"></script>
 
   <script>
-    // 画面幅によって初期ズームを調整
-    const zoomLevel = window.innerWidth < 768 ? 11 : 10;
-    const map = L.map('map').setView([34.693763, 135.502191], zoomLevel);
+    const map = L.map('map').setView([34.69376333136194, 135.50219053509102], 10);
 
-    // レイヤー設定
-    const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-    const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+    var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
 
     osmLayer.addTo(map);
 
@@ -55,17 +28,14 @@
       "航空写真": satelliteLayer
     }).addTo(map);
 
-    // アイコンサイズを画面幅で変える
-    const iconSize = window.innerWidth < 768 ? [20, 20] : [25, 25];
     const customIcon = L.icon({
-      iconUrl: 'images/onigiri.png',
-      iconSize: iconSize,
-      iconAnchor: [iconSize[0]-5, iconSize[1]-5],
-      popupAnchor: [0, -iconSize[1]+5]
+      iconUrl: 'onigiri.png', // HTMLと同じフォルダに配置
+      iconSize: [25, 25],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -40]
     });
 
-    // CSV読み込み
-    Papa.parse("data/onigiri_osaka.csv", {
+    Papa.parse("onigiri_osaka.csv", {
       download: true,
       header: true,
       complete: function(results) {
